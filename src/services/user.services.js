@@ -16,7 +16,21 @@ const getAll = async () => {
   return { type: null, message: users };
 };
 
+const getUserById = async (userId) => {
+  const user = await User.findAll({
+    where: {
+      id: userId,
+    },
+    attributes: { exclude: ['password'] },
+  });
+  if (user.length === 0) {
+    return { type: 400, message: 'User does not exist' };
+  }
+  return { type: null, message: user[0] };
+};
+
 module.exports = {
   createUser,
   getAll,
+  getUserById,
 };
