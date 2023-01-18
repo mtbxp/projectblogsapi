@@ -16,3 +16,4 @@ const Category = (sequelize, Datatypes) => {
   };
   
   module.exports = Category;
+  

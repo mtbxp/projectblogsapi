@@ -1,5 +1,5 @@
 const { User } = require('../models');
-const { createToken } = require('../helpers/jwt');
+const { createToken } = require('../helper/jwt');
 
 const loginService = {
   login: async ({ email, password }) => {
