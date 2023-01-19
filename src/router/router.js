@@ -7,6 +7,7 @@ const validateUser = require('../middleware/validateUser');
 const validateJwt = require('../middleware/validateJwt');
 const categoryController = require('../controller/category.Controller');
 const validateName = require('../middleware/validateName');
+const postController = require('../controller/blogPost.Controller');
 
 const router = express.Router();
 
@@ -16,5 +17,7 @@ router.get('/user', validateJwt, userController.getAllUsers);
 router.get('/user/:id', validateJwt, userController.getUserByIdController);
 router.post('/categories', validateJwt, validateName, categoryController.createCategoryController);
 router.get('/categories', validateJwt, categoryController.getAllCategories);
+router.get('/post', validateJwt, postController.getAll);
+router.get('/post/:id', validateJwt, postController.getPostById);
 
 module.exports = router;
