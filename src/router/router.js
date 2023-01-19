@@ -22,8 +22,9 @@ router.get('/categories', validateJwt, categoryController.getAllCategories);
 router.get('/post', validateJwt, postController.getAll);
 router.get('/post/:id', validateJwt, postController.getPostById);
 router.put('/post/:id', validateJwt, validateUpdate, postController.updatePostById);
-// router.delete('/post/:id', validateJwt, postController.deletePost);
+router.get('/search', validateJwt, postController.getPostsByQuery);
 router.delete('/user/me', validateJwt, postController.deleteUser);
 router.post('/post', validateJwt, validateNewPost, postController.createBlogPost);
+router.delete('/post/:id', validateJwt, postController.deletePostById);
 
 module.exports = router;

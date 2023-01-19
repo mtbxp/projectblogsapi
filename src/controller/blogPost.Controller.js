@@ -54,10 +54,39 @@ const deleteUser = async (req, res) => {
     return res.status(204).end();    
 };
 
+const getPostsByQuery = async (req, res) => {
+  const { q } = req.query;
+  const { status, posts, message } = await PostService.getPostsByQuery(q);
+  if (message) return res.status(status).json({ message });
+  res.status(status).json(posts);
+};
+
+const deleteById = async (req, res) => {
+  const { id } = req.params;
+  const { user } = req;
+
+  const { status, message } = await PostService.deleteById(user, id);
+
+  return res.status(status).json({ message });
+};
+
+const deletePostById = async (req, res) => {
+    const { id } = req.params;
+    const { id: userId } = req.user;
+    const post = await PostService.getPostById(id);
+    if (!post) return res.status(404).json({ message: 'Post does not exist' });
+    const postId = await PostService.deletePostById(id, userId);
+    if (postId === 0) return res.status(401).json({ message: 'Unauthorized user' });
+    return res.status(204).end();    
+};
+
 module.exports = {
   getAll,
   getPostById,
   updatePostById,
   deleteUser,
   createBlogPost,
+  getPostsByQuery,
+  deleteById,
+  deletePostById,
 };

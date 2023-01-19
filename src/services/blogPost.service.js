@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const { BlogPost, PostCategory, User, Category } = require('../models');
-
 const config = require('../config/config');
 
 const env = 'development';
@@ -52,10 +51,16 @@ const deleteUser = async (idUser) => {
   return deleted;
 };
 
+const deletePostById = async (idPost, userId) => { 
+  const result = BlogPost.destroy({ where: { id: idPost, userId } });
+  return result;
+};
+
 module.exports = {
   getAll,
   getPostById,
   updatePostById,
   deleteUser,
   createBlogPost,
+  deletePostById,
 };
