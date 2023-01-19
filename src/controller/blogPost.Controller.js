@@ -33,8 +33,15 @@ const updatePostById = async (req, res) => {
     return post; 
 };
 
+const deleteUser = async (req, res) => { 
+    const { id: userId } = req.user;
+    await blogPostService.deleteUser(userId);    
+    return res.status(204).end();    
+};
+
 module.exports = {
   getAll,
   getPostById,
   updatePostById,
+  deleteUser,
 };

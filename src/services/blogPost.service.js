@@ -17,8 +17,14 @@ const updatePostById = async (idPost, userId, title, content) => {
   return update;
 };
 
+const deleteUser = async (idUser) => {
+  const deleted = User.destroy({ where: { id: idUser } });
+  return deleted;
+};
+
 module.exports = {
   getAll,
   getPostById,
   updatePostById,
+  deleteUser,
 };
