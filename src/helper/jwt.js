@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { User } = require('../models');
 
 require('dotenv').config();
 
@@ -13,10 +14,10 @@ const configJwt = { algorithm: 'HS256',
     return tokenCreate;
   };
 
-  const verifyToken = (token) => {
-    const tokenVerify = jwt.token(token, JWT_SECRET);
-
-    return tokenVerify;
+  const verifyToken = async (authorization) => {
+      const { data } = jwt.verify(authorization, JWT_SECRET);
+      const user = await User.findOne({ where: { email: data.email } });
+      return { data, user };
   };
 
 module.exports = { createToken, verifyToken };

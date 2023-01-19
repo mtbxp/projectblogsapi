@@ -8,9 +8,18 @@ const createCategory = async (name) => {
   return { type: null, message: category };
 };
 
+const findAndCountCategorys = async (arr) => {
+  const { count } = await Category.findAndCountAll({
+    where: {
+      id: arr,
+    },    
+  });
+  return count;
+};
+
 const getAllCategories = async () => {
   const categories = await Category.findAll();
   return categories;
 };
 
-module.exports = { createCategory, getAllCategories };
+module.exports = { createCategory, getAllCategories, findAndCountCategorys };

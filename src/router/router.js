@@ -9,6 +9,7 @@ const categoryController = require('../controller/category.Controller');
 const validateName = require('../middleware/validateName');
 const postController = require('../controller/blogPost.Controller');
 const { validateUpdate } = require('../middleware/validateUpdate');
+const validateNewPost = require('../middleware/validateNewPost');
 
 const router = express.Router();
 
@@ -23,5 +24,6 @@ router.get('/post/:id', validateJwt, postController.getPostById);
 router.put('/post/:id', validateJwt, validateUpdate, postController.updatePostById);
 // router.delete('/post/:id', validateJwt, postController.deletePost);
 router.delete('/user/me', validateJwt, postController.deleteUser);
+router.post('/post', validateJwt, validateNewPost, postController.createBlogPost);
 
 module.exports = router;
