@@ -12,7 +12,13 @@ const getPostById = async (id) => BlogPost.findByPk(id, {
     { model: Category, as: 'categories', through: { attributes: [] } }],
 });
 
+const updatePostById = async (idPost, userId, title, content) => { 
+  const update = BlogPost.update({ title, content }, { where: { id: idPost, userId } });
+  return update;
+};
+
 module.exports = {
   getAll,
   getPostById,
+  updatePostById,
 };
